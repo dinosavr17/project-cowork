@@ -1,0 +1,32 @@
+@import "../../node_modules/bootstrap/scss/bootstrap";
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+.vh-100 {
+  background: cornflowerblue linear-gradient(rgba(0,33, 55, 0.5), transparent);
+}
+.img-fluid{
+  border-radius: 1rem 0 0 1rem;
+}
+.card {
+  border-radius: 1rem;
+}
+.fw-normal {
+  letter-spacing: 1px;
+}
+.extra {
+color: #393f81;
+  .inline {
+    inline: true;
+  }
+}
