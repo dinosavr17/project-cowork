@@ -1,9 +1,9 @@
 import React, {Fragment} from "react";
-import {Form} from "../components/Form";
+import {SignIn} from "../components/SignIn";
 export const Home = () => {
     return (
         <Fragment>
-            <Form/>
+            <SignIn/>
         </Fragment>
     )
 }

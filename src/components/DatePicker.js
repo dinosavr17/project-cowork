@@ -37,9 +37,17 @@ export const DatePick = () => {
                                         >
                                             {formik => (
                                                 <div>
-                                                    <h1 className="my-3-lg font-weight-bold .display-4">Выберите Дату</h1>
+                                                    <h1 className="my-3-lg font-weight-bold .display-4">Выберите дату и время</h1>
                                                     <Form>
-                                                        <TextField label="Date" name="date" type="date" classname="inline"/>
+                                                        <TextField label="Date" name="date" type="date" classname="inline" required/>
+                                                        <label htmlFor="timeStart">Начало брони</label>
+                                                        <div className="half-width">
+                                                        <TextField name="timeStart" type="time" className="inline" required/>
+                                                        </div>
+                                                        <label htmlFor="timeFinish">Конец брони</label>
+                                                        <div className="half-width">
+                                                        <TextField name="timeFinish" type="time" className="inline" required/>
+                                                        </div>
                                                         <button className="btn btn-dark mt-3" type="submit">Сохранить</button>
                                                     </Form>
                                                 </div>
