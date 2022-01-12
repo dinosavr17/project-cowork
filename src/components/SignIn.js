@@ -47,8 +47,8 @@ export const SignIn = () => {
                                                     <div>
                                                         <h1 className="my-3-lg font-weight-bold .display-4">Войти </h1>
                                                         <Form>
-                                                            <TextField name="email" type="email"  placeholder="Enter Email" required/>
-                                                            <TextField name="password" type="password" placeholder="Enter Password" required/>
+                                                            <TextField name="email" type="email"  placeholder="Enter Email" required autocomplete="off"/>
+                                                            <TextField name="password" type="password" placeholder="Enter Password" required autocomplete="off"/>
                                                             <button className="btn btn-dark mt-3" type="submit">Сохранить</button>
                                                         </Form>
                                                     </div>

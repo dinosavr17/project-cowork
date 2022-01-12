@@ -1,8 +1,9 @@
 import React from 'react';
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { TextField } from './TextField';
 import * as Yup from 'yup';
 import logo from "./logo.png";
+import {Axios} from "axios";
 
 export const Signup = () => {
     const validate = Yup.object({
@@ -13,6 +14,9 @@ export const Signup = () => {
         confirmPassword: Yup.string()
             .oneOf([Yup.ref('password'), null], 'Пароли должны совпадать')
     })
+    var Airtable = require('airtable');
+    var base = new Airtable({apiKey: 'keyPA4YhGaGhJ5IlM'}).base('appXlt95cyk8bk8J0');
+
     return (
         <section className="vh-100">
             <div className="container py-5 h-100">
@@ -37,16 +41,66 @@ export const Signup = () => {
                 confirmPassword: ''
             }}
             validationSchema={validate}
-            onSubmit={values => {
-                console.log(values)
+            onSubmit={async (values) => {
+                const data = {
+                    records: [
+                        {
+                            fields: {
+                                email: values.email,
+                                password: values.password,
+                                confirmPassword: values.confirmPassword,
+                            },
+                        },
+                    ],
+
+                };
+                var Airtable = require('airtable');
+                var base = new Airtable({apiKey: 'keyPA4YhGaGhJ5IlM'}).base('appXlt95cyk8bk8J0');
+
+                base('users').create([
+                    {
+                        "fields": {
+                            "email": values.email,
+                            "password": values.password,
+                            "confirmPassword": values.confirmPassword,
+                        }
+                    }
+                ], function(err, records) {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+                    records.forEach(function(record) {
+                        console.log(record.get('email'));
+                    });
+                });
+                const axiosConfig = {
+                    headers: {
+                        Authorization: 'Bearer ${key}',
+                        'Content-Type': 'application/json',
+                    },
+                };
+
+                await Axios.post (
+                    "http://localhost:8080/register",
+                        data,
+                        axiosConfig,
+            )
+
+                    .then((response) => {
+                        console.log(response.data);
+                        }
+                    )
             }}
         >
             {formik => (
                 <div>
-                    <h1 className="my-3-lg font-weight-bold .display-4">Зарегистрироваться</h1>
+                    <h2 className="my-3-lg font-weight-bold .display-4">Зарегистрироваться</h2>
                     <Form>
-                        <TextField label="Email" name="email" type="email" required autocomplete="off" />
-                        <TextField label="Пароль" name="password" type="password" required autocomplete="off"/>
+                        <TextField label="Email" name="email" type="email" placeholder="Enter Email" id="email"required/>
+                        <ErrorMessage name="email"></ErrorMessage>
+                        <TextField label="Пароль" name="password" type="password" placeholder="Enter Password" id="password"required/>
+                        <TextField label="Пароль" name="confirmPassword" type="password" placeholder="Confirm Password" id="confirmPassword"/>
                         <button className="btn btn-dark mt-3" type="submit">Сохранить</button>
                     </Form>
                 </div>
