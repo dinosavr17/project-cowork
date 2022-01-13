@@ -4,6 +4,7 @@ import {Home} from "./pages/Home";
 import {About} from "./pages/About";
 import {Date} from "./pages/Date";
 import {Navbar} from "./components/Navbar";
+import {History} from "./pages/History";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Route path = {'/'} exact component={Home}/>
       <Route path = {'/about'} component={About}/>
       <Route path={'/datepicker'} component={Date}/>
+      <Route path={'/booking'} component={History}/>
   </Switch>
   </div>
       </BrowserRouter>
